@@ -1,8 +1,9 @@
 import java.time.LocalTime;
 import java.util.List;
+import java.util.Optional;
 
 public class TicketService {
-    private final List<Ticket> ticketStorage = List.of(
+    private static final List<Ticket> ticketStorage = List.of(
             new Ticket("1", "MainHall", 123, LocalTime.of(12, 0), true, 'B', 10.5),
             new Ticket("2", "MainHall", 124, LocalTime.of(13, 0), true, 'A', 12.0),
             new Ticket("3", "MainHall", 125, LocalTime.of(14, 0), false, 'C', 15.0),
@@ -14,4 +15,10 @@ public class TicketService {
             new Ticket("9", "SideHall", 131, LocalTime.of(20, 0), false, 'G', 7.0),
             new Ticket("10", "SideHall", 132, LocalTime.of(21, 0), true, 'H', 9.5)
     );
+
+    public static Optional<Ticket> getTicketById(String id) {
+        return ticketStorage.stream()
+                .filter(ticket -> ticket.getId().equals(id))
+                .findFirst();
+    }
 }
